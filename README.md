@@ -11,4 +11,4 @@ Initial Requirements
 
 	4) Delete a Student from the Database
 
-Later the JDBC connection will be replace by a JPA managed connection
+Later the JDBC connection will be replaced by a JPA managed connection
