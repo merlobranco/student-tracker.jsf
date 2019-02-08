@@ -5,7 +5,7 @@
 	  xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 	<f:metadata>
-		<f:event type="preRenderView" listener="#{studentController.loadStudents}"/>
+		<f:event type="preRenderView" listener="#{studentController.loadStudents()}"/>
 	</f:metadata>
 	
 	<h:head>
@@ -32,38 +32,39 @@
 			
 				<h:messages globalOnly="true" />
 			
+				<h:button value="Add Student" styleClass="add-student-button" outcome="add-student-form"/>			
 				<h:form>
 							
-				<h:dataTable value="#{studentController.students}" var="tempStudent"
-					styleClass="demo-table" 
-					headerClass="demo-table-header"
-					rowClasses="demo-table-odd-row,demo-table-even-row">
-	
-					<h:column>
-						<!-- the column header -->
-						<f:facet name="header">First Name</f:facet>
-	
-						<!--  the value for each row -->
-						#{tempStudent.firstName}
-					</h:column>
-	
-					<h:column>
-						<!-- the column header -->
-						<f:facet name="header">Last Name</f:facet>
-	
-						<!--  the value for each row -->
-						#{tempStudent.lastName}
-					</h:column>
-	
-					<h:column>
-						<!-- the column header -->
-						<f:facet name="header">Email</f:facet>
-	
-						<!--  the value for each row -->
-						#{tempStudent.email}
-					</h:column>
-	
-				</h:dataTable>
+					<h:dataTable value="#{studentController.students}" var="tempStudent"
+						styleClass="demo-table" 
+						headerClass="demo-table-header"
+						rowClasses="demo-table-odd-row,demo-table-even-row">
+		
+						<h:column>
+							<!-- the column header -->
+							<f:facet name="header">First Name</f:facet>
+		
+							<!--  the value for each row -->
+							#{tempStudent.firstName}
+						</h:column>
+		
+						<h:column>
+							<!-- the column header -->
+							<f:facet name="header">Last Name</f:facet>
+		
+							<!--  the value for each row -->
+							#{tempStudent.lastName}
+						</h:column>
+		
+						<h:column>
+							<!-- the column header -->
+							<f:facet name="header">Email</f:facet>
+		
+							<!--  the value for each row -->
+							#{tempStudent.email}
+						</h:column>
+		
+					</h:dataTable>
 	
 				</h:form>
 	

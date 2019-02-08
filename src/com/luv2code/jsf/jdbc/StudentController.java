@@ -48,6 +48,28 @@ public class StudentController {
 		}
 	}
 	
+	public String addStudent(Student theStudent) {
+
+		logger.info("Adding student: " + theStudent);
+
+		try {
+			
+			// add student to the database
+			studentDbUtil.addStudent(theStudent);
+			
+		} catch (Exception exc) {
+			// send this to server logs
+			logger.log(Level.SEVERE, "Error adding students", exc);
+			
+			// add error message for JSF page
+			addErrorMessage(exc);
+
+			return null;
+		}
+		
+		return "list-students?faces-redirect=true";
+	}
+	
 	/**
 	 * Adding a custom error message to the Faces Context
 	 * @param exc
