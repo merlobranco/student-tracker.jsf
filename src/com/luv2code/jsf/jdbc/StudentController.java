@@ -73,7 +73,7 @@ public class StudentController {
 		return "list-students?faces-redirect=true";
 	}
 	
-public String loadStudent(int studentId) {
+	public String loadStudent(int studentId) {
 		
 		logger.info("loading student: " + studentId);
 		
@@ -123,6 +123,28 @@ public String loadStudent(int studentId) {
 		// Required for updating the list of students from the database
 		return "list-students?faces-redirect=true";		
 	}
+	
+	public String deleteStudent(int studentId) {
+
+		logger.info("Deleting student id: " + studentId);
+		
+		try {
+
+			// delete the student from the database
+			studentDbUtil.deleteStudent(studentId);
+			
+		} catch (Exception exc) {
+			// send this to server logs
+			logger.log(Level.SEVERE, "Error deleting student id: " + studentId, exc);
+			
+			// add error message for JSF page
+			addErrorMessage(exc);
+			
+			return null;
+		}
+		
+		return "list-students";	
+	}	
 	
 	/**
 	 * Adding a custom error message to the Faces Context
