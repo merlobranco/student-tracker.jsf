@@ -32,7 +32,17 @@
 			
 				<h:messages globalOnly="true" />
 			
-				<h:button value="Add Student" styleClass="add-student-button" outcome="add-student-form"/>			
+				<h:button value="Add Student" styleClass="add-student-button" outcome="add-student-form"/>
+				
+				<!--  add a search box -->
+	            <h:form>
+	        
+	                <h:outputLabel>Search student:</h:outputLabel> <h:inputText value="#{studentController.theSearchName}" id="theSearchName" />
+	                
+	                <h:commandButton value="Search" action="list-students?faces-redirect=true" styleClass="add-student-button" />            
+	            
+	            </h:form>
+							
 				<h:form>
 							
 					<h:dataTable value="#{studentController.students}" var="tempStudent"

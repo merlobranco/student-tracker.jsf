@@ -16,6 +16,7 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class StudentController {
 
+	private String theSearchName;
 	private List<Student> students;
 	private StudentDbUtil studentDbUtil;
 	private Logger logger = Logger.getLogger(getClass().getName());
@@ -26,6 +27,14 @@ public class StudentController {
 		studentDbUtil = StudentDbUtil.getInstance();
 	}
 	
+	public String getTheSearchName() {
+		return theSearchName;
+	}
+
+	public void setTheSearchName(String theSearchName) {
+		this.theSearchName = theSearchName;
+	}
+
 	public List<Student> getStudents() {
 		return students;
 	}
@@ -34,12 +43,20 @@ public class StudentController {
 
 		logger.info("Loading students");
 		
+		logger.info("theSearchName = " + theSearchName);
+		
 		students.clear();
 
 		try {
 			
-			// Get all students from database
-			students = studentDbUtil.getStudents();
+			if (theSearchName != null && theSearchName.trim().length() > 0) {
+                // Search for students by name
+                students = studentDbUtil.searchStudents(theSearchName);                
+            }
+            else {
+                // Get all students from database
+                students = studentDbUtil.getStudents();
+            }
 			
 		} catch (Exception exc) {
 			// Send this to server logs
@@ -48,6 +65,10 @@ public class StudentController {
 			// Add error message for JSF page
 			addErrorMessage(exc);
 		}
+		finally {
+            // Reset the search info
+            theSearchName = null;
+        }
 	}
 	
 	public String addStudent(Student theStudent) {
